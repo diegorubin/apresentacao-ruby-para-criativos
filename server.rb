@@ -3,6 +3,7 @@ require 'json'
 
 require_relative 'examples/data/person'
 
+set :port, 9494
 set :public_folder, 'public'
 
 get '/example/person' do
