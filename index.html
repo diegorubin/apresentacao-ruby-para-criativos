@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Ruby Para Testers | Diego Rubin</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/blood.css">
@@ -36,7 +36,60 @@
           </p>
         </section>
 
+        <section>
+          <p>
+            <img src="images/wolfs.png" width="750" />
+          </p>
+        </section>
+
 				<section>
+          <section>
+            <h2>Faker</h2>
+            <p>
+              <a href="https://github.com/stympy/faker">
+                https://github.com/stympy/faker
+              </a>
+            </p>
+            <p>
+              Geração de Massa de Dados
+            </p>
+          </section>
+          <section>
+            <h3>Gerar Nomes</h3>
+            <pre>
+              <code class="ruby">
+2.3.3 :002 &gt; Faker::Name.name
+ =&gt; "Marlin Sawayn" 
+2.3.3 :003 &gt; Faker::Name.name
+ =&gt; "Demetris Bartell IV" 
+              </code>
+            </pre> 
+          </section>
+          <section>
+            <h3>Gerar Pessoas</h3>
+            <pre>
+              <code class="ruby" data-trim style="word-wrap: break-word;">
+module Person
+  def self.generate
+    name = Faker::Name.name
+    {
+      avatar: Faker::Avatar.image(name.gsub(/\.|\ /, '-')),
+      name: name,
+      title: Faker::Job.title,
+      birthday: Faker::Date.birthday(18, 65),
+      email: Faker::Internet.email,
+      bio: [
+        Faker::Simpsons, Faker::StarWars, Faker::Hobbit
+      ][rand(3)].quote
+    }
+  end
+end
+              </code>
+            </pre> 
+
+          </section>
+          <section>
+          </section>
         </section>
 
 			</div>
@@ -44,6 +97,7 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
+		<script src="js/examples.js"></script>
 
 		<script>
 			// More info about config & dependencies:

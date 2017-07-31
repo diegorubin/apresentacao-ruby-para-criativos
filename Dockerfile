@@ -1,19 +1,28 @@
-MAINTAINER rubin.diego@gmail.com
 FROM fedora:26
+MAINTAINER rubin.diego@gmail.com
 
-RUN dnf install -y httpd ruby node
+RUN dnf install -y ruby nodejs rubygem-bundler
 
 RUN mkdir /application
 
-COPY css /application/css
-COPY examples /application/examples
-COPY js /application/js
-COPY lib /application/lib
-COPY node_modules /application/node_modules
-COPY plugin /application/plugin
+ADD css /application/css
+ADD examples /application/examples
 
-COPY bower.json /application/bower.json
-COPY Gruntfile.js /application/Gruntfile.js
-COPY index.html /application/index.html
-COPY package.json /application/package.json
+WORKDIR /application/examples
+RUN bundle install
+
+ADD js /application/js
+ADD lib /application/lib
+ADD node_modules /application/node_modules
+ADD plugin /application/plugin
+
+ADD bower.json /application/bower.json
+ADD Gruntfile.js /application/Gruntfile.js
+ADD index.html /application/index.html
+ADD package.json /application/package.json
+ADD presentation-start /application/presentation-start
+
+WORKDIR /application
+
+CMD presentation-start
 
