@@ -4,6 +4,7 @@ GEM
     amq-protocol (2.2.0)
     bunny (2.7.0)
       amq-protocol (>= 2.2.0)
+    cpf_cnpj (0.3.0)
     faker (1.8.4)
       i18n (~> 0.5)
     i18n (0.8.6)
@@ -24,6 +25,7 @@ PLATFORMS
 
 DEPENDENCIES
   bunny
+  cpf_cnpj
   faker
   json
   sinatra

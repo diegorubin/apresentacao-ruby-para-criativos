@@ -42,16 +42,20 @@
           </p>
         </section>
 
+        <section>
+          <img src="images/righttool.jpg" width="550" />
+        </section>
+
 				<section>
           <section>
-            <h2>Faker</h2>
+            <h2>Geração de Dados</h2>
+          </section>
+          <section>
+            <h3>Faker</h3>
             <p>
               <a href="https://github.com/stympy/faker">
                 https://github.com/stympy/faker
               </a>
-            </p>
-            <p>
-              Geração de Massa de Dados
             </p>
           </section>
           <section>
@@ -86,7 +90,6 @@ module Person
 end
               </code>
             </pre> 
-
           </section>
           <section data-state="loadPerson">
             <div style="min-height: 400px;">
@@ -104,6 +107,84 @@ end
                 <p id="person-bio"></p>
               </div>
             </div>
+          </section>
+          <section>
+            <h3>CPF_CNPJ</h3>
+            <p>
+              <a href="https://github.com/fnando/cpf_cnpj">
+                https://github.com/fnando/cpf_cnpj
+              </a>
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Obtenção de Dados</h2>
+          </section>
+          <section>
+            <h3>Regex</h3>
+            <p>
+              <a href="https://ruby-doc.org/core-2.3.1/Regexp.html">
+                https://ruby-doc.org/core-2.3.1/Regexp.html
+              </a>
+            </p>
+            <p>
+              <a href="http://diegorubin.com/2011/04/16/utilizando-expressoes-regulares-em-ruby">
+                http://diegorubin.com/2011/04/16/utilizando-expressoes-regulares-em-ruby
+              </a>
+            </p>
+          </section>
+          <section>
+            <p>
+              <img src="http://piazinho.com.br/ed5/capa-292.jpg">
+            </p>
+            <p>
+              <a href="http://piazinho.com.br/">
+                http://piazinho.com.br/
+              </a>
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <h2>Migração de Dados</h2>
+        </section>
+
+        <section>
+          <section>
+            <h2>Prototipação</h2>
+          </section>
+          <section>
+            <h3>Bunny</h3>
+            <p>
+              <a href="https://github.com/ruby-amqp/bunny">
+                https://github.com/ruby-amqp/bunny
+              </a>
+            </p>
+            <p>Consumindo e Publicando em Filas do Rabbitmq</p>
+          </section>
+          <section>
+            <h3>Consumindo e Publicando</h3>
+            <pre>
+              <code class="ruby" data-trim style="word-wrap: break-word;">
+conn = Bunny.new
+conn.start
+
+ch = conn.create_channel
+q = ch.queue("example", exclusive: true)
+
+p = ch.queue("dlq")
+
+options = {block: true, manual_ack: true}
+q.subscribe(options) do |info, properties, payload|
+  name = properties[:headers]['name']
+  puts name
+
+  p.publish(name)
+end
+              </code>
+            </pre> 
           </section>
         </section>
 
