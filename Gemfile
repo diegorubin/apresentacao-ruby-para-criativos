@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'json'
 gem 'faker'
 gem 'cpf_cnpj'
+gem 'httparty'
+gem 'nokogiri'
 
 # rabbitmq
 gem 'bunny'

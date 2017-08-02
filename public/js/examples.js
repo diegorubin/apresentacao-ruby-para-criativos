@@ -16,6 +16,21 @@ function loadPerson(event) {
   oReq.send();
 }
 
+function loadRobotMaster(event) {
+  event.preventDefault();
+  var master = "Bomb Man";
+
+  var oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", function() {
+    var master = JSON.parse(this.responseText);
+    document.getElementById("master-avatar").setAttribute('src', master.avatar);
+  });
+  oReq.open("GET", "/example/megaman?master" = master);
+  oReq.send();
+}
+
 document.getElementById("reload-button").onclick = loadPerson;
 Reveal.addEventListener('loadPerson', loadPerson);
+
+Reveal.addEventListener('loadMaster', loadRobotMaster);
 
