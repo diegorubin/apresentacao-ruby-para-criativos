@@ -47,9 +47,25 @@ function loadRobotMaster(event) {
   }
 }
 
+function loadCpfs(event) {
+  if (event.keyCode == 13 || !event.keyCode) {
+    var number = document.getElementById('line-numbers').value;
+
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", function() {
+      document.getElementById('csv-content').contentWindow.location.reload();
+    });
+    oReq.open("GET", "/example/cpf?n=" + number);
+    oReq.send();
+
+    return false;
+  }
+}
+
 document.getElementById("reload-button").onclick = loadPerson;
 Reveal.addEventListener('loadPerson', loadPerson);
 
 document.getElementById("master-input").onkeypress = loadRobotMaster;
 Reveal.addEventListener('loadMaster', loadRobotMaster);
 
+document.getElementById("line-numbers").onkeypress = loadCpfs;

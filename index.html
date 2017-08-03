@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Ruby Para Testers | Diego Rubin</title>
+		<title>Ruby Para Criativos | Diego Rubin</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/blood.css">
@@ -24,15 +24,14 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-
 				<section>
-          <h1>Ruby para Testers</h1>
+          <h1>Ruby para Criativos</h1>
           <p>
             <a href="https://github.com/diegorubin" target="_github">@diegorubin</a>
           </p>
           <p>
-            <a href="http://ruby-para-testers.diegorubin.com"
-            target="_ruby">http://ruby-para-testers.diegorubin.com</a>
+            <a href="http://ruby-para-criativos.diegorubin.com"
+            target="_ruby">http://ruby-para-criativos.diegorubin.com</a>
           </p>
         </section>
 
@@ -44,6 +43,12 @@
 
         <section>
           <img src="images/righttool.jpg" width="550" />
+        </section>
+
+        <section>
+          <section>
+            <h2>Ruby em <span style="color:red;">1</span> slide</h2>
+          </section>
         </section>
 
 				<section>
@@ -116,8 +121,34 @@ end
               </a>
             </p>
           </section>
+          <section>
+            <h3>Gerar Lista de CPF</h3>
+            <pre>
+              <code class="ruby" data-trim style="word-wrap: break-word;">
+module CPFGenerator
+  def self.generate(n, output, formatted = true)
+    file = File.open(output, 'w')
+    n.times do 
+      file.puts [ 
+        Faker::Name.first_name, 
+        Faker::Name.last_name,  
+        CPF.generate(formatted) 
+      ].join(',')
+    end
+    file.close
+  end
+end
+              </code>
+            </pre> 
+          </section>
+          <section>
+            <p>
+              <input id="line-numbers" value="4" />
+            </p>
+            <iframe id="csv-content" style="font-size:20px;background-color: white;" src="/example/output">
+            </iframe>
+          </section>
         </section>
-
         <section>
           <section>
             <h2>Obtenção de Dados</h2>
@@ -131,12 +162,70 @@ end
             </p>
           </section>
           <section>
+            <h3>Exemplo</h3>
+            <pre>
+              <code class="ruby" data-trim style="word-wrap: break-word;">
+class MegaMan
+  include HTTParty
+  base_uri 'megaman.wikia.com/wiki/'
+
+  def master(name)
+    @name = name
+    to_master(self.class.get('/' + name.gsub(' ', '_')).body)
+  end
+
+  ...
+
+end
+              </code>
+            </pre> 
+          </section>
+          <section>
             <h3>Nokogiri</h3>
             <p>
               <a href="https://github.com/sparklemotion/nokogiri">
                 https://github.com/sparklemotion/nokogiri
               </a>
             </p>
+          </section>
+          <section>
+            <img src="images/fandom.png">
+          </section>
+          <section>
+            <h3>Exemplo</h3>
+            <pre>
+              <code class="ruby" data-trim style="word-wrap: break-word;">
+class MegaMan
+  ...
+  def to_master(content)
+    document = Nokogiri::HTML(content)
+    {
+      name: @name,
+      avatar: get_avatar(document),
+      damage: get_damage(document)
+    }
+  end
+  ...
+  def get_damage(document)
+    table = {}
+    begin
+      element = document.css("#Damage_Data_Chart").first.parent
+      element = element.next until element.name == 'table'
+      rows = element.css('tr')
+
+      weapons  = rows[1].css('td').collect {|w| w.text.strip}
+      damage = rows[2].css('td').collect {|d| d.text.strip}
+
+      weapons.each_with_index { |w, i| table[w] = damage[i] }
+    rescue
+      puts "data chart not found"
+    end
+    table
+  end
+
+end
+              </code>
+            </pre> 
           </section>
           <section data-state="loadMaster">
             <p>
@@ -179,10 +268,10 @@ end
               </a>
             </p>
           </section>
-        </section>
-
-        <section>
-          <h2>Migração de Dados</h2>
+          <section>
+            <img src="/images/rubular.png"/>
+            <a href="http://rubular.com">http://rubular.com</a>
+          </section>
         </section>
 
         <section>
@@ -246,9 +335,10 @@ end
           <section>
             <h3>Comandos</h3>
           </section>
-          <section>
-            <h3>Uso no código</h3>
-          </section>
+        </section>
+        <section>
+          <h2>Perguntas?</h2>
+          <img src="/images/perguntas.jpg" />
         </section>
 
 			</div>

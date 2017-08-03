@@ -1,7 +1,8 @@
 FROM fedora:26
 MAINTAINER rubin.diego@gmail.com
 
-RUN dnf install -y ruby nodejs rubygem-bundler rubygem-json
+RUN dnf install -y ruby rubygem-bundler rubygem-json rpm-build zlib-devel \
+  gcc libxml2-devel libxslt-devel ruby-devel make
 
 RUN mkdir /application
 WORKDIR /application
