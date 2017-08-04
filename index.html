@@ -42,12 +42,26 @@
         </section>
 
         <section>
+          <img src="images/mimimi.jpg" width="550" />
+        </section>
+
+        <section>
           <img src="images/righttool.jpg" width="550" />
         </section>
 
         <section>
           <section>
             <h2>Ruby em <span style="color:red;">1</span> slide</h2>
+          </section>
+          <section>
+            <ul>
+              <li>Linguagem Interpretada</li>
+              <li>Tipagem dinâmica e forte</li>
+              <li>Orientada a Objetos</li>
+              <li>Reflexão - Metaprogramação</li>
+              <li>Criada em 1995</li>
+              <li>Última Versão: 2.4.1</li>
+            </ul>
           </section>
         </section>
 
@@ -319,6 +333,26 @@ end
             <p>Criando aplicações HTTP</p>
           </section>
           <section>
+            <h3>Exemplo</h3>
+            <pre>
+              <code class="ruby" data-trim style="word-wrap: break-word;">
+require "sinatra"
+
+get '/api/:name' do
+  content_type 'plain/text'
+  if File.exists?("files/#{params[:name]}")
+    File.open("files/#{params[:name]}").read
+  else
+    status 404
+  end
+end
+              </code>
+            </pre>
+            <a href="https://github.com/diegorubin/apresentacao-ruby-para-criativos/blob/master/server.rb">
+              https://github.com/diegorubin/apresentacao-ruby-para-criativos/blob/master/server.rb
+            </a>
+          </section>
+          <section>
             <h3>TShield</h3>
             <p>
               <a href="https://github.com/diegorubin/tshield">
@@ -333,7 +367,76 @@ end
             <h2>Hybris GEM</h2>
           </section>
           <section>
+            <h3>Instalação</h3>
+            <pre>
+              <code class="bash" data-trim style="word-wrap: break-word;">
+git clone git@bitbucket.org:carrefour_ecommerce/c4-hybris-gem.git
+cd c4-hybris-gem
+rake install
+hybris generate -c
+              </code>
+            </pre> 
+          </section>
+          <section>
             <h3>Comandos</h3>
+            <pre>
+              <code class="bash" data-trim style="word-wrap: break-word;">
+# Listar todos os comandos
+hybris commands
+
+# Gerar configurações
+hybris generate -h
+
+# Manipular pedidos
+hybris order -h
+
+# Informações sobre statuses
+hybris status -h
+              </code>
+            </pre> 
+          </section>
+          <section>
+            <h3>Comandos - Order</h3>
+            <pre>
+              <code data-trim style="word-wrap: break-word;">
+-t status, --to status
+  set status for order
+
+-p products, --products products
+  set list of produts in consignment
+
+-c number, --consignment number
+  consignment number
+
+-n name, --transaction name
+  use named transaction
+
+-s status, --start status 
+  status to start transaction
+
+-a attributes, --attributes attributes
+  example: codigo_unico_devolucao=0001
+              </code>
+            </pre> 
+          </section>
+          <section>
+            <h3>Comandos - Order</h3>
+            <pre>
+              <code class="bash" data-trim style="word-wrap: break-word;">
+# É possível adicionar novas em:
+# ~/.hybris/transactions.yml
+hybris status transactions
+
+refund_parcial: 2990 -> 3090 -> 5000 -> 8150 -> 8170
+entregue: 2990 -> 3090 -> 4000 -> 4060 -> 4020
+troca: 8000 -> 8010 -> 8150 -> 8160 -> 8170
+
+# exemplos
+hybris order -p 5011 -c DR001690080001 -n entregue
+hybris order -p 5011 -c DR001690080001 -n entregue -s 3090
+hybris order -p 5011 -c DR001690080001 -t 3090
+              </code>
+            </pre> 
           </section>
         </section>
         <section>
