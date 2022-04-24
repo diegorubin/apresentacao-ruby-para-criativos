@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ruby-para-criativos-service
+  namespace: diegorubindev
+spec:
+  selector:
+    app: ruby-para-criativos
+  ports:
+    - protocol: TCP
+      port: 9494
+      targetPort: 9494

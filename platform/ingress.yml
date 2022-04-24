@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ruby-para-criativos-ingress
+  namespace: diegorubindev
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - ruby-para-criativos.diegorubin.dev
+    secretName: ruby-para-criativos-tls
+  rules:
+  - host: ruby-para-criativos.diegorubin.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: ruby-para-criativos-service
+            port:
+              number: 9494
+        path: /
+        pathType: Prefix
+  ingressClassName: nginx
